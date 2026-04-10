@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sheet-width: 794px;   /* A4 at ~96dpi */
-      --sheet-height: 1123px;
+      --sheet-width: 210mm;
+      --sheet-height: 297mm;
       --ui-bg: #f5f5f5;
       --line: #d7d7d7;
       --text: #111;
@@ -55,9 +55,7 @@
       line-height: 1.5;
     }
 
-    .field {
-      margin-bottom: 14px;
-    }
+    .field { margin-bottom: 14px; }
 
     .field label {
       display: block;
@@ -110,11 +108,32 @@
       color: #111;
     }
 
-    .note {
+    .drag-panel {
       margin-top: 14px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .drag-panel h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .drag-panel p,
+    .note {
+      margin-top: 10px;
       font-size: 12px;
       color: var(--muted);
       line-height: 1.5;
+    }
+
+    .coord-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
     }
 
     .preview-wrap {
@@ -129,6 +148,7 @@
       position: relative;
       background: #fff;
       box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      aspect-ratio: 210 / 297;
     }
 
     .base-template {
@@ -136,7 +156,7 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: fill;
       opacity: 0.2;
       pointer-events: none;
       user-select: none;
@@ -151,149 +171,157 @@
 
     .last-unit {
       position: absolute;
-      left: 58px;
-      top: -10px;
-      width: 680px;
+      left: 12mm;
+      top: -1mm;
+      width: 178mm;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 900;
-      font-size: 160px;
+      font-size: 19.5mm;
       line-height: 0.84;
-      letter-spacing: -4px;
+      letter-spacing: -0.6mm;
       text-transform: uppercase;
       text-align: center;
     }
 
-    .scoin-block {
+    .drag-group {
       position: absolute;
-      left: 72px;
-      top: 350px;
-      display: flex;
-      align-items: flex-start;
-      gap: 26px;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .drag-group.dragging { cursor: grabbing; }
+
+    .drag-outline {
+      outline: 1px dashed rgba(0,0,0,0.35);
+      outline-offset: 2px;
+    }
+
+    .scoin-value-group {
+      left: 23mm;
+      top: 92mm;
     }
 
     .percent-main {
       font-weight: 900;
-      font-size: 332px;
+      font-size: 48mm;
       line-height: 0.8;
-      letter-spacing: -16px;
-      min-width: 470px;
+      letter-spacing: -2.2mm;
+      min-width: 64mm;
       text-align: center;
     }
 
-    .percent-side {
-      padding-top: 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+    .scoin-text-group {
+      left: 129mm;
+      top: 108mm;
       font-family: "Poppins", "Noto Sans", Arial, Helvetica, sans-serif;
     }
 
     .percent-symbol {
       font-weight: 900;
-      font-size: 145px;
+      font-size: 21mm;
       line-height: 0.78;
-      letter-spacing: -8px;
+      letter-spacing: -1mm;
       font-family: "Poppins", "Noto Sans", Arial, Helvetica, sans-serif;
     }
 
     .percent-symbol .asterisk {
-      font-size: 40px;
+      font-size: 6mm;
       vertical-align: top;
       margin-left: 0;
       position: relative;
-      top: -12px;
+      top: -2mm;
     }
 
     .cashback {
       font-weight: 900;
       line-height: 0.94;
       text-transform: uppercase;
-      margin-top: 14px;
-      letter-spacing: -1px;
+      margin-top: 2.2mm;
+      letter-spacing: -0.15mm;
       font-family: "Poppins", "Noto Sans", Arial, Helvetica, sans-serif;
     }
 
     .cashback .scoin-line {
       display: block;
-      font-size: 45px;
+      font-size: 6.5mm;
     }
 
     .cashback .cashback-line {
       display: block;
-      font-size: 33px;
-      letter-spacing: -0.6px;
+      font-size: 4.8mm;
+      letter-spacing: -0.08mm;
     }
 
     .price-box {
       position: absolute;
-      left: 20px;
-      top: 769px;
-      width: 758px;
-      height: 342px;
+      left: 5.3mm;
+      top: 203.5mm;
+      width: 199.4mm;
+      height: 90.5mm;
       background: #dcdcdc;
     }
 
     .model-label,
     .desc-label {
       position: absolute;
-      left: 38px;
-      font-size: 19px;
+      left: 10mm;
+      font-size: 5mm;
       line-height: 1.08;
       text-transform: uppercase;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.08mm;
     }
 
-    .model-label { top: 791px; }
-    .desc-label { top: 821px; }
+    .model-label { top: 209.5mm; }
+    .desc-label { top: 217.3mm; }
 
     .model-value,
     .desc-value {
       position: absolute;
-      left: 162px;
-      width: 585px;
-      font-size: 19px;
+      left: 42.8mm;
+      width: 154mm;
+      font-size: 5mm;
       line-height: 1.08;
       text-transform: uppercase;
       font-weight: 700;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.06mm;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .model-value { top: 791px; }
-    .desc-value { top: 821px; }
+    .model-value { top: 209.5mm; }
+    .desc-value { top: 217.3mm; }
 
     .now-rm {
       position: absolute;
-      left: 33px;
-      top: 912px;
+      left: 8.8mm;
+      top: 241mm;
       font-weight: 900;
       text-transform: uppercase;
       line-height: 0.86;
-      letter-spacing: -2px;
+      letter-spacing: -0.3mm;
     }
 
     .now-rm .now {
-      font-size: 52px;
+      font-size: 13.8mm;
       display: block;
     }
 
     .now-rm .rm {
-      font-size: 86px;
+      font-size: 22.8mm;
       display: block;
     }
 
     .now-price {
       position: absolute;
-      left: 204px;
-      top: 872px;
-      width: 535px;
+      left: 54mm;
+      top: 230.5mm;
+      width: 140mm;
       font-weight: 900;
-      font-size: 176px;
+      font-size: 46mm;
       line-height: 0.92;
-      letter-spacing: -10px;
+      letter-spacing: -1.3mm;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
@@ -301,42 +329,30 @@
 
     .before {
       position: absolute;
-      right: 23px;
-      top: 1051px;
-      font-size: 26px;
+      right: 5.8mm;
+      top: 278.5mm;
+      font-size: 6.8mm;
       text-transform: uppercase;
       white-space: nowrap;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.2mm;
     }
 
-    .before .value {
-      font-weight: 400;
-    }
+    .before .value { font-weight: 400; }
 
-    .screen-only {
-      display: block;
-    }
+    .screen-only { display: block; }
 
     @media (max-width: 1180px) {
-      .app {
-        grid-template-columns: 1fr;
-      }
-
+      .app { grid-template-columns: 1fr; }
       .controls {
         position: static;
         height: auto;
         border-right: 0;
         border-bottom: 1px solid var(--line);
       }
-
-      .preview-wrap {
-        padding: 16px;
-      }
-
+      .preview-wrap { padding: 16px; }
       .sheet {
-        transform-origin: top center;
-        transform: scale(0.82);
-        margin-bottom: -200px;
+        width: min(210mm, calc(100vw - 32px));
+        height: auto;
       }
     }
 
@@ -346,28 +362,38 @@
         margin: 0;
       }
 
-      body {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
         background: #fff;
       }
 
       .controls,
-      .screen-only {
+      .screen-only,
+      .drag-outline {
         display: none !important;
       }
 
       .app,
       .preview-wrap {
         display: block;
-        padding: 0;
-        margin: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
       }
 
       .sheet {
-        width: 210mm;
-        height: 297mm;
-        margin: 0;
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
         box-shadow: none;
         page-break-after: avoid;
+        page-break-inside: avoid;
       }
 
       .base-template {
@@ -413,9 +439,32 @@
         <button id="clearBtn" class="secondary" type="button">Clear</button>
       </div>
 
+      <div class="drag-panel">
+        <h3>Drag fine tuning</h3>
+        <p>Dua group di preview boleh drag: nombor percentage dan blok %* S-COIN CASHBACK. Nilai koordinat akan update automatik.</p>
+        <div class="coord-grid">
+          <div class="field">
+            <label for="percentX">Percent X (mm)</label>
+            <input id="percentX" type="number" step="0.5" />
+          </div>
+          <div class="field">
+            <label for="percentY">Percent Y (mm)</label>
+            <input id="percentY" type="number" step="0.5" />
+          </div>
+          <div class="field">
+            <label for="textX">Text X (mm)</label>
+            <input id="textX" type="number" step="0.5" />
+          </div>
+          <div class="field">
+            <label for="textY">Text Y (mm)</label>
+            <input id="textY" type="number" step="0.5" />
+          </div>
+        </div>
+      </div>
+
       <div class="note">
         Letakkan fail imej template scan dalam folder yang sama dengan fail ini dan pastikan namanya <strong>PRE-PRINT TEMPLATE.png</strong>.<br><br>
-        Preview akan tunjuk template pada opacity rendah untuk alignment. Masa print, hanya elemen overlay akan keluar.
+        Preview akan tunjuk template pada opacity rendah untuk alignment. Masa print, hanya elemen overlay akan keluar. Saiz print dikunci kepada nisbah A4, walaupun saiz asal imej scan berbeza.
       </div>
     </aside>
 
@@ -426,12 +475,13 @@
         <div class="overlay">
           <div class="last-unit">LAST<br>UNIT</div>
 
-          <div class="scoin-block">
+          <div class="drag-group scoin-value-group drag-outline" id="scoinValueGroup">
             <div class="percent-main" id="percentMain">70</div>
-            <div class="percent-side">
-              <div class="percent-symbol">%<span class="asterisk">*</span></div>
-              <div class="cashback"><span class="scoin-line">S-COIN</span><span class="cashback-line">CASHBACK</span></div>
-            </div>
+          </div>
+
+          <div class="drag-group scoin-text-group drag-outline" id="scoinTextGroup">
+            <div class="percent-symbol">%<span class="asterisk">*</span></div>
+            <div class="cashback"><span class="scoin-line">S-COIN</span><span class="cashback-line">CASHBACK</span></div>
           </div>
 
           <div class="price-box"></div>
@@ -459,12 +509,24 @@
     const beforePriceInput = document.getElementById('beforePrice');
     const nowPriceInput = document.getElementById('nowPrice');
     const scoinPercentInput = document.getElementById('scoinPercent');
+    const percentXInput = document.getElementById('percentX');
+    const percentYInput = document.getElementById('percentY');
+    const textXInput = document.getElementById('textX');
+    const textYInput = document.getElementById('textY');
 
     const modelValue = document.getElementById('modelValue');
     const descValue = document.getElementById('descValue');
     const beforeValue = document.getElementById('beforeValue');
     const nowValue = document.getElementById('nowValue');
     const percentMain = document.getElementById('percentMain');
+    const sheet = document.getElementById('sheet');
+    const scoinValueGroup = document.getElementById('scoinValueGroup');
+    const scoinTextGroup = document.getElementById('scoinTextGroup');
+
+    const dragState = {
+      percent: { x: 23, y: 92 },
+      text: { x: 129, y: 108 }
+    };
 
     function sanitizeText(value) {
       return value.replace(/[<>]/g, '').trim();
@@ -478,6 +540,22 @@
       return value.replace(/[^0-9]/g, '').slice(0, 3);
     }
 
+    function mmToCss(mm) {
+      return `${mm}mm`;
+    }
+
+    function applyDragPositions() {
+      scoinValueGroup.style.left = mmToCss(dragState.percent.x);
+      scoinValueGroup.style.top = mmToCss(dragState.percent.y);
+      scoinTextGroup.style.left = mmToCss(dragState.text.x);
+      scoinTextGroup.style.top = mmToCss(dragState.text.y);
+
+      percentXInput.value = dragState.percent.x;
+      percentYInput.value = dragState.percent.y;
+      textXInput.value = dragState.text.x;
+      textYInput.value = dragState.text.y;
+    }
+
     function updatePreview() {
       modelValue.textContent = sanitizeText(modelInput.value).toUpperCase();
       descValue.textContent = sanitizeText(descriptionInput.value).toUpperCase().replace(/\n+/g, ' ');
@@ -486,9 +564,67 @@
       percentMain.textContent = sanitizePercent(scoinPercentInput.value) || '';
     }
 
+    function bindCoordInput(input, group, axis) {
+      input.addEventListener('input', () => {
+        const val = parseFloat(input.value);
+        if (Number.isFinite(val)) {
+          dragState[group][axis] = val;
+          applyDragPositions();
+        }
+      });
+    }
+
+    function enableDrag(el, groupKey) {
+      let dragging = false;
+      let startX = 0;
+      let startY = 0;
+      let originX = 0;
+      let originY = 0;
+
+      el.addEventListener('pointerdown', (e) => {
+        if (window.matchMedia('print').matches) return;
+        dragging = true;
+        el.classList.add('dragging');
+        el.setPointerCapture(e.pointerId);
+        startX = e.clientX;
+        startY = e.clientY;
+        originX = dragState[groupKey].x;
+        originY = dragState[groupKey].y;
+      });
+
+      el.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const rect = sheet.getBoundingClientRect();
+        const dxPx = e.clientX - startX;
+        const dyPx = e.clientY - startY;
+        const mmPerPxX = 210 / rect.width;
+        const mmPerPxY = 297 / rect.height;
+        dragState[groupKey].x = +(originX + dxPx * mmPerPxX).toFixed(1);
+        dragState[groupKey].y = +(originY + dyPx * mmPerPxY).toFixed(1);
+        applyDragPositions();
+      });
+
+      const endDrag = (e) => {
+        dragging = false;
+        el.classList.remove('dragging');
+        try { el.releasePointerCapture(e.pointerId); } catch {}
+      };
+
+      el.addEventListener('pointerup', endDrag);
+      el.addEventListener('pointercancel', endDrag);
+    }
+
     [modelInput, descriptionInput, beforePriceInput, nowPriceInput, scoinPercentInput].forEach(el => {
       el.addEventListener('input', updatePreview);
     });
+
+    bindCoordInput(percentXInput, 'percent', 'x');
+    bindCoordInput(percentYInput, 'percent', 'y');
+    bindCoordInput(textXInput, 'text', 'x');
+    bindCoordInput(textYInput, 'text', 'y');
+
+    enableDrag(scoinValueGroup, 'percent');
+    enableDrag(scoinTextGroup, 'text');
 
     document.getElementById('printBtn').addEventListener('click', () => {
       updatePreview();
@@ -509,6 +645,8 @@
     beforePriceInput.value = '9,999';
     nowPriceInput.value = '9,999';
     scoinPercentInput.value = '70';
+
+    applyDragPositions();
     updatePreview();
   </script>
 </body>
