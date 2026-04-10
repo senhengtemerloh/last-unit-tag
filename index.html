@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S-Coin Pricetag Overlay</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --sheet-width: 210mm;
@@ -18,10 +18,17 @@
       --panel: #fff;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: "Noto Sans", Arial, Helvetica, sans-serif;
       background: var(--ui-bg);
       color: var(--text);
@@ -55,7 +62,9 @@
       line-height: 1.5;
     }
 
-    .field { margin-bottom: 14px; }
+    .field {
+      margin-bottom: 14px;
+    }
 
     .field label {
       display: block;
@@ -142,13 +151,14 @@
     }
 
     .sheet {
+      position: relative;
       width: var(--sheet-width);
       height: var(--sheet-height);
       margin: 0 auto;
-      position: relative;
       background: #fff;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       aspect-ratio: 210 / 297;
+      overflow: hidden;
     }
 
     .base-template {
@@ -171,14 +181,14 @@
 
     .last-unit {
       position: absolute;
-      left: 12mm;
-      top: -1mm;
-      width: 178mm;
+      left: 10mm;
+      top: -1.5mm;
+      width: 190mm;
       font-family: Arial, Helvetica, sans-serif;
       font-weight: 900;
-      font-size: 19.5mm;
+      font-size: 21mm;
       line-height: 0.84;
-      letter-spacing: -0.6mm;
+      letter-spacing: -0.7mm;
       text-transform: uppercase;
       text-align: center;
     }
@@ -190,16 +200,18 @@
       touch-action: none;
     }
 
-    .drag-group.dragging { cursor: grabbing; }
+    .drag-group.dragging {
+      cursor: grabbing;
+    }
 
     .drag-outline {
-      outline: 1px dashed rgba(0,0,0,0.35);
+      outline: 1px dashed rgba(0, 0, 0, 0.35);
       outline-offset: 2px;
     }
 
     .scoin-value-group {
-      left: 23mm;
-      top: 92mm;
+      left: 28mm;
+      top: 97mm;
     }
 
     .percent-main {
@@ -209,11 +221,12 @@
       letter-spacing: -2.2mm;
       min-width: 64mm;
       text-align: center;
+      white-space: nowrap;
     }
 
     .scoin-text-group {
-      left: 129mm;
-      top: 108mm;
+      left: 130mm;
+      top: 114mm;
       font-family: "Poppins", "Noto Sans", Arial, Helvetica, sans-serif;
     }
 
@@ -223,14 +236,14 @@
       line-height: 0.78;
       letter-spacing: -1mm;
       font-family: "Poppins", "Noto Sans", Arial, Helvetica, sans-serif;
+      white-space: nowrap;
     }
 
     .percent-symbol .asterisk {
+      display: inline-block;
       font-size: 6mm;
-      vertical-align: top;
-      margin-left: 0;
-      position: relative;
-      top: -2mm;
+      margin-left: 0.2mm;
+      transform: translateY(-2.2mm);
     }
 
     .cashback {
@@ -272,8 +285,13 @@
       letter-spacing: -0.08mm;
     }
 
-    .model-label { top: 209.5mm; }
-    .desc-label { top: 217.3mm; }
+    .model-label {
+      top: 209.5mm;
+    }
+
+    .desc-label {
+      top: 217.3mm;
+    }
 
     .model-value,
     .desc-value {
@@ -290,8 +308,13 @@
       text-overflow: ellipsis;
     }
 
-    .model-value { top: 209.5mm; }
-    .desc-value { top: 217.3mm; }
+    .model-value {
+      top: 209.5mm;
+    }
+
+    .desc-value {
+      top: 217.3mm;
+    }
 
     .now-rm {
       position: absolute;
@@ -304,13 +327,13 @@
     }
 
     .now-rm .now {
-      font-size: 13.8mm;
       display: block;
+      font-size: 13.8mm;
     }
 
     .now-rm .rm {
-      font-size: 22.8mm;
       display: block;
+      font-size: 22.8mm;
     }
 
     .now-price {
@@ -337,19 +360,30 @@
       letter-spacing: -0.2mm;
     }
 
-    .before .value { font-weight: 400; }
+    .before .value {
+      font-weight: 400;
+    }
 
-    .screen-only { display: block; }
+    .screen-only {
+      display: block;
+    }
 
     @media (max-width: 1180px) {
-      .app { grid-template-columns: 1fr; }
+      .app {
+        grid-template-columns: 1fr;
+      }
+
       .controls {
         position: static;
         height: auto;
         border-right: 0;
         border-bottom: 1px solid var(--line);
       }
-      .preview-wrap { padding: 16px; }
+
+      .preview-wrap {
+        padding: 16px;
+      }
+
       .sheet {
         width: min(210mm, calc(100vw - 32px));
         height: auto;
@@ -362,11 +396,10 @@
         margin: 0;
       }
 
-      html, body {
+      html,
+      body {
         width: 210mm;
         height: 297mm;
-        margin: 0;
-        padding: 0;
         overflow: hidden;
         background: #fff;
       }
@@ -380,10 +413,10 @@
       .app,
       .preview-wrap {
         display: block;
-        padding: 0 !important;
-        margin: 0 !important;
         width: 210mm;
         height: 297mm;
+        margin: 0 !important;
+        padding: 0 !important;
         overflow: hidden;
       }
 
@@ -392,6 +425,7 @@
         height: 297mm !important;
         margin: 0 !important;
         box-shadow: none;
+        break-inside: avoid;
         page-break-after: avoid;
         page-break-inside: avoid;
       }
@@ -421,21 +455,21 @@
       <div class="row">
         <div class="field">
           <label for="beforePrice">Before Price</label>
-          <input id="beforePrice" type="text" placeholder="9,999" />
+          <input id="beforePrice" type="text" placeholder="9,999" inputmode="decimal" />
         </div>
         <div class="field">
           <label for="nowPrice">Now Price</label>
-          <input id="nowPrice" type="text" placeholder="9,999" />
+          <input id="nowPrice" type="text" placeholder="9,999" inputmode="decimal" />
         </div>
       </div>
 
       <div class="field">
         <label for="scoinPercent">S-Coin %</label>
-        <input id="scoinPercent" type="text" placeholder="70" maxlength="3" />
+        <input id="scoinPercent" type="text" placeholder="70" maxlength="3" inputmode="numeric" />
       </div>
 
       <div class="btns">
-        <button id="printBtn">Print</button>
+        <button id="printBtn" type="button">Print</button>
         <button id="clearBtn" class="secondary" type="button">Clear</button>
       </div>
 
@@ -463,7 +497,7 @@
       </div>
 
       <div class="note">
-        Letakkan fail imej template scan dalam folder yang sama dengan fail ini dan pastikan namanya <strong>PRE-PRINT TEMPLATE.png</strong>.<br><br>
+        Letakkan fail imej template scan dalam folder yang sama dengan fail ini dan pastikan namanya <strong>PRE-PRINT TEMPLATE.png</strong>.<br /><br />
         Preview akan tunjuk template pada opacity rendah untuk alignment. Masa print, hanya elemen overlay akan keluar. Saiz print dikunci kepada nisbah A4, walaupun saiz asal imej scan berbeza.
       </div>
     </aside>
@@ -473,7 +507,7 @@
         <img class="base-template" src="PRE-PRINT TEMPLATE.png" alt="Template reference" onerror="this.style.display='none'" />
 
         <div class="overlay">
-          <div class="last-unit">LAST<br>UNIT</div>
+          <div class="last-unit">LAST<br />UNIT</div>
 
           <div class="drag-group scoin-value-group drag-outline" id="scoinValueGroup">
             <div class="percent-main" id="percentMain">70</div>
@@ -481,7 +515,10 @@
 
           <div class="drag-group scoin-text-group drag-outline" id="scoinTextGroup">
             <div class="percent-symbol">%<span class="asterisk">*</span></div>
-            <div class="cashback"><span class="scoin-line">S-COIN</span><span class="cashback-line">CASHBACK</span></div>
+            <div class="cashback">
+              <span class="scoin-line">S-COIN</span>
+              <span class="cashback-line">CASHBACK</span>
+            </div>
           </div>
 
           <div class="price-box"></div>
@@ -522,26 +559,32 @@
     const sheet = document.getElementById('sheet');
     const scoinValueGroup = document.getElementById('scoinValueGroup');
     const scoinTextGroup = document.getElementById('scoinTextGroup');
+    const printBtn = document.getElementById('printBtn');
+    const clearBtn = document.getElementById('clearBtn');
 
     const dragState = {
-      percent: { x: 23, y: 92 },
-      text: { x: 129, y: 108 }
+      percent: { x: 28, y: 97 },
+      text: { x: 130, y: 114 }
     };
 
     function sanitizeText(value) {
-      return value.replace(/[<>]/g, '').trim();
+      return String(value).replace(/[<>]/g, '').trim();
     }
 
     function sanitizePrice(value) {
-      return value.replace(/[^0-9.,]/g, '').trim();
+      return String(value).replace(/[^0-9.,]/g, '').trim();
     }
 
     function sanitizePercent(value) {
-      return value.replace(/[^0-9]/g, '').slice(0, 3);
+      return String(value).replace(/[^0-9]/g, '').slice(0, 3);
     }
 
     function mmToCss(mm) {
       return `${mm}mm`;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
     }
 
     function applyDragPositions() {
@@ -549,89 +592,109 @@
       scoinValueGroup.style.top = mmToCss(dragState.percent.y);
       scoinTextGroup.style.left = mmToCss(dragState.text.x);
       scoinTextGroup.style.top = mmToCss(dragState.text.y);
-
-      percentXInput.value = dragState.percent.x;
-      percentYInput.value = dragState.percent.y;
-      textXInput.value = dragState.text.x;
-      textYInput.value = dragState.text.y;
+      percentXInput.value = dragState.percent.x.toFixed(1);
+      percentYInput.value = dragState.percent.y.toFixed(1);
+      textXInput.value = dragState.text.x.toFixed(1);
+      textYInput.value = dragState.text.y.toFixed(1);
     }
 
     function updatePreview() {
       modelValue.textContent = sanitizeText(modelInput.value).toUpperCase();
-      descValue.textContent = sanitizeText(descriptionInput.value).toUpperCase().replace(/\n+/g, ' ');
-      beforeValue.textContent = sanitizePrice(beforePriceInput.value) || '';
-      nowValue.textContent = sanitizePrice(nowPriceInput.value) || '';
-      percentMain.textContent = sanitizePercent(scoinPercentInput.value) || '';
+      descValue.textContent = sanitizeText(descriptionInput.value).replace(/\s*\n\s*/g, ' ').toUpperCase();
+      beforeValue.textContent = sanitizePrice(beforePriceInput.value);
+      nowValue.textContent = sanitizePrice(nowPriceInput.value);
+      percentMain.textContent = sanitizePercent(scoinPercentInput.value);
     }
 
-    function bindCoordInput(input, group, axis) {
+    function bindCoordInput(input, group, axis, min, max) {
       input.addEventListener('input', () => {
-        const val = parseFloat(input.value);
-        if (Number.isFinite(val)) {
-          dragState[group][axis] = val;
-          applyDragPositions();
+        const value = parseFloat(input.value);
+        if (!Number.isFinite(value)) {
+          return;
         }
+        dragState[group][axis] = +clamp(value, min, max).toFixed(1);
+        applyDragPositions();
       });
     }
 
-    function enableDrag(el, groupKey) {
+    function enableDrag(element, groupKey, maxX, maxY) {
       let dragging = false;
       let startX = 0;
       let startY = 0;
       let originX = 0;
       let originY = 0;
 
-      el.addEventListener('pointerdown', (e) => {
-        if (window.matchMedia('print').matches) return;
+      const endDrag = (event) => {
+        if (!dragging) {
+          return;
+        }
+        dragging = false;
+        element.classList.remove('dragging');
+        try {
+          element.releasePointerCapture(event.pointerId);
+        } catch (error) {
+        }
+      };
+
+      element.addEventListener('pointerdown', (event) => {
+        if (!event.isPrimary) {
+          return;
+        }
         dragging = true;
-        el.classList.add('dragging');
-        el.setPointerCapture(e.pointerId);
-        startX = e.clientX;
-        startY = e.clientY;
+        element.classList.add('dragging');
+        startX = event.clientX;
+        startY = event.clientY;
         originX = dragState[groupKey].x;
         originY = dragState[groupKey].y;
+        try {
+          element.setPointerCapture(event.pointerId);
+        } catch (error) {
+        }
       });
 
-      el.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
+      element.addEventListener('pointermove', (event) => {
+        if (!dragging) {
+          return;
+        }
         const rect = sheet.getBoundingClientRect();
-        const dxPx = e.clientX - startX;
-        const dyPx = e.clientY - startY;
+        if (!rect.width || !rect.height) {
+          return;
+        }
+        const dxPx = event.clientX - startX;
+        const dyPx = event.clientY - startY;
         const mmPerPxX = 210 / rect.width;
         const mmPerPxY = 297 / rect.height;
-        dragState[groupKey].x = +(originX + dxPx * mmPerPxX).toFixed(1);
-        dragState[groupKey].y = +(originY + dyPx * mmPerPxY).toFixed(1);
+        dragState[groupKey].x = +clamp(originX + dxPx * mmPerPxX, 0, maxX).toFixed(1);
+        dragState[groupKey].y = +clamp(originY + dyPx * mmPerPxY, 0, maxY).toFixed(1);
         applyDragPositions();
       });
 
-      const endDrag = (e) => {
+      element.addEventListener('pointerup', endDrag);
+      element.addEventListener('pointercancel', endDrag);
+      element.addEventListener('lostpointercapture', () => {
         dragging = false;
-        el.classList.remove('dragging');
-        try { el.releasePointerCapture(e.pointerId); } catch {}
-      };
-
-      el.addEventListener('pointerup', endDrag);
-      el.addEventListener('pointercancel', endDrag);
+        element.classList.remove('dragging');
+      });
     }
 
-    [modelInput, descriptionInput, beforePriceInput, nowPriceInput, scoinPercentInput].forEach(el => {
-      el.addEventListener('input', updatePreview);
+    [modelInput, descriptionInput, beforePriceInput, nowPriceInput, scoinPercentInput].forEach((input) => {
+      input.addEventListener('input', updatePreview);
     });
 
-    bindCoordInput(percentXInput, 'percent', 'x');
-    bindCoordInput(percentYInput, 'percent', 'y');
-    bindCoordInput(textXInput, 'text', 'x');
-    bindCoordInput(textYInput, 'text', 'y');
+    bindCoordInput(percentXInput, 'percent', 'x', 0, 170);
+    bindCoordInput(percentYInput, 'percent', 'y', 0, 220);
+    bindCoordInput(textXInput, 'text', 'x', 0, 190);
+    bindCoordInput(textYInput, 'text', 'y', 0, 240);
 
-    enableDrag(scoinValueGroup, 'percent');
-    enableDrag(scoinTextGroup, 'text');
+    enableDrag(scoinValueGroup, 'percent', 170, 220);
+    enableDrag(scoinTextGroup, 'text', 190, 240);
 
-    document.getElementById('printBtn').addEventListener('click', () => {
+    printBtn.addEventListener('click', () => {
       updatePreview();
       window.print();
     });
 
-    document.getElementById('clearBtn').addEventListener('click', () => {
+    clearBtn.addEventListener('click', () => {
       modelInput.value = '';
       descriptionInput.value = '';
       beforePriceInput.value = '';
