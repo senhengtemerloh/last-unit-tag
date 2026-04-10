@@ -151,24 +151,25 @@
 
     .last-unit {
       position: absolute;
-      left: 150px;
-      top: 18px;
+      left: 122px;
+      top: 8px;
+      width: 560px;
+      font-family: Arial, Helvetica, sans-serif;
       font-weight: 900;
-      font-size: 118px;
-      line-height: 0.9;
-      letter-spacing: -1px;
+      font-size: 132px;
+      line-height: 0.88;
+      letter-spacing: -2px;
       text-transform: uppercase;
       text-align: center;
-      width: 485px;
     }
 
     .scoin-block {
       position: absolute;
-      left: 46px;
-      top: 288px;
+      left: 48px;
+      top: 322px;
       display: flex;
       align-items: flex-start;
-      gap: 18px;
+      gap: 26px;
     }
 
     .percent-main {
@@ -180,7 +181,7 @@
     }
 
     .percent-side {
-      padding-top: 32px;
+      padding-top: 48px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -188,8 +189,8 @@
 
     .percent-symbol {
       font-weight: 900;
-      font-size: 147px;
-      line-height: 0.8;
+      font-size: 145px;
+      line-height: 0.78;
       letter-spacing: -8px;
     }
 
@@ -198,16 +199,26 @@
       vertical-align: top;
       margin-left: 0;
       position: relative;
-      top: -10px;
+      top: -12px;
     }
 
     .cashback {
       font-weight: 900;
-      font-size: 42px;
-      line-height: 0.93;
+      line-height: 0.94;
       text-transform: uppercase;
       margin-top: 14px;
       letter-spacing: -1px;
+    }
+
+    .cashback .scoin-line {
+      display: block;
+      font-size: 45px;
+    }
+
+    .cashback .cashback-line {
+      display: block;
+      font-size: 33px;
+      letter-spacing: -0.6px;
     }
 
     .price-box {
@@ -415,7 +426,7 @@
             <div class="percent-main" id="percentMain">70</div>
             <div class="percent-side">
               <div class="percent-symbol">%<span class="asterisk">*</span></div>
-              <div class="cashback">S-COIN<br>CASHBACK</div>
+              <div class="cashback"><span class="scoin-line">S-COIN</span><span class="cashback-line">CASHBACK</span></div>
             </div>
           </div>
 
